@@ -43,6 +43,16 @@
 </style>
 <body>
 <div class="container">
+
+    @if(session()->has('message'))
+
+        <div class="alert alert-success alert-dismissible fade show w-50" role="alert">
+            {{ session()->get('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    @endif
+
     <!-- COMPONENT NAVBAR i tambe aplico la propietat rounded -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mt-2 rounded" >
         <div class="container-fluid">
@@ -359,18 +369,23 @@
                     </div>
                     <div class="col-md-3 py-md-5 py-4 aside-stretch-right pl-lg-5">
                         <h2 class="footer-heading footer-heading-white">Contacteu amb nosaltres</h2>
-                        <form action="#" class="contact-form">
+                        <form method="POST" action="{{ route('contact') }}" class="contact-form">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="El teu nom">
+                                <input type="text" name="name" class="form-control" placeholder="El teu nom" value={{ old('name') }}>
+                                {!! $errors->first('name', '<small style="color:red">:message</small><br>') !!}
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="El teu email">
+                                <input type="text" name="email" class="form-control" placeholder="El teu email" value={{ old('email') }}>
+                                {!! $errors->first('email', '<small style="color:red">:message</small><br>') !!}
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Assumpte">
+                                <input type="text" name="subject" class="form-control" placeholder="Assumpte" value={{ old('subject') }}>
+                                {!! $errors->first('subject', '<small style="color:red">:message</small><br>') !!}
                             </div>
                             <div class="form-group">
-                                <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Missatge"></textarea>
+                                <textarea  name="content" id="" cols="30" rows="3" class="form-control" placeholder="Missatge">{{ old('content') }}</textarea>
+                                {!! $errors->first('content', '<small style="color:red">:message</small><br>') !!}
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="form-control submit px-3">Enviar</button>
