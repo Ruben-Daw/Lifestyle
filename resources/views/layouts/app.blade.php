@@ -29,6 +29,14 @@
 </style>
 
 <body style="background-color:black;">
+    @if(session()->has('message'))
+
+        <div class="alert alert-success alert-dismissible fade show w-50" role="alert">
+            {{ session()->get('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    @endif
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -88,5 +96,17 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script>
+
+        document.querySelector("#btnClose").onclick = function(e) {
+            e.preventDefault();
+            new bootstrap.Toast(document.querySelector('#toastBasic')).hide();
+        }
+
+    </script>
+
 </body>
 </html>
