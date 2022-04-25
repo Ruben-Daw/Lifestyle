@@ -13,11 +13,20 @@ class userController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $allUsers = User::get();
 
-        return view('viewUsers', compact('allUsers'));
+        $search = trim($request->get('search'));
+
+        $users = DB::table('users')
+            ->select('usuari_id','nom','cognoms','email')
+            ->where('cognoms','LIKE','%'.$search.'%')
+            ->orWhere('nom','LIKE','%'.$search.'%')
+            ->orWhere('email','LIKE','%'.$search.'%')
+            ->orderBy('cognoms','asc')
+            ->paginate(10);
+
+        return view('viewUsers', compact('users','search'));
     }
 
     /**
