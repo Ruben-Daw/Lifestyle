@@ -19,11 +19,11 @@ class userController extends Controller
         $search = trim($request->get('search'));
 
         $users = DB::table('users')
-            ->select('usuari_id','nom','cognoms','email')
-            ->where('cognoms','LIKE','%'.$search.'%')
-            ->orWhere('nom','LIKE','%'.$search.'%')
+            ->select('user_id','name','last_names','email')
+            ->where('last_names','LIKE','%'.$search.'%')
+            ->orWhere('name','LIKE','%'.$search.'%')
             ->orWhere('email','LIKE','%'.$search.'%')
-            ->orderBy('cognoms','asc')
+            ->orderBy('last_names','asc')
             ->paginate(10);
 
         return view('viewUsers', compact('users','search'));

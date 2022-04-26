@@ -14,6 +14,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     use Notifiable;
 
-    protected $primaryKey = 'usuari_id';
-    protected $fillable = ['nom', 'cognoms', 'data_naixement', 'username', 'email', 'password', 'tipus_privilegi',];
+    protected $primaryKey = 'user_id';
+    protected $fillable = ['name', 'last_names', 'date_of_birth', 'username', 'email', 'password', 'role',];
 }
