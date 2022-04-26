@@ -26,7 +26,7 @@ class userController extends Controller
             ->orderBy('last_names','asc')
             ->paginate(10);
 
-        return view('viewUsers', compact('users','search'));
+        return view('admin.viewUsers', compact('users','search'));
     }
 
     /**
