@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
@@ -23,12 +24,12 @@ use Illuminate\Support\Str;
 |
 */
 
-Route::view('/', 'home')->name('home');
-Route::view('/contact', 'contact')->name('contact');
-Route::view('/shop', 'shop')->name('shop');
+Route::view('/', 'home')->middleware('auth.user')->name('home');
+Route::view('/contact', 'contact')->middleware('auth.user')->name('contact');
+Route::view('/shop', 'shop')->middleware('auth.user')->name('shop');
 
-Route::get('/users', [userController::class,'index'])->name('users.index');
-Route::get('/users/{userId}', [userController::class,'destroy'])->name('users.destroy');
+Route::get('/admin/users', [userController::class,'index'])->middleware('auth.admin')->name('users.index');
+Route::get('/admin/users/{userId}', [userController::class,'destroy'])->middleware('auth.admin')->name('users.destroy');
 
 Route::get('/email/verify', function () {
     return view('auth.verify');
@@ -47,6 +48,10 @@ Route::get('/forgot-password', function () {
 Route::get('/reset-password/{token}', function ($token) {
     return view('auth.passwords.reset', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
+
+Route::get('/admin', [adminController::class, 'index'])
+    ->middleware('auth.admin')
+    ->name('admin.index');
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
