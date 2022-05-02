@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\adminController;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\shopController;
 use App\Http\Controllers\userController;
+use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\adminController;
+use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,19 @@ use Illuminate\Support\Str;
 
 Route::view('/', 'home')->middleware('auth.user')->name('home');
 Route::view('/contact', 'contact')->middleware('auth.user')->name('contact');
-Route::view('/shop', 'shop')->middleware('auth.user')->name('shop');
+// Route::view('/shop', 'shop')->middleware('auth.user')->name('shop');
 
 Route::get('/admin/users', [userController::class,'index'])->middleware('auth.admin')->name('users.index');
 Route::get('/admin/users/{userId}', [userController::class,'destroy'])->middleware('auth.admin')->name('users.destroy');
+
+Route::get('/shop',[shopController::class,'index'])->middleware('auth.user')->name('shop.index');
+Route::get('/novetats',[shopController::class,'index'])->middleware('auth.user');
+Route::get('/home',[shopController::class,'index'])->middleware('auth.user');
+Route::get('/dona',[shopController::class,'index'])->middleware('auth.user');
+Route::get('/nen',[shopController::class,'index'])->middleware('auth.user');
+Route::get('/ofertes',[shopController::class,'index'])->middleware('auth.user');
+Route::get('/shop/{id}',[shopController::class,'show'])->middleware('auth.user')->name('shop.show');
+
 
 Route::get('/email/verify', function () {
     return view('auth.verify');

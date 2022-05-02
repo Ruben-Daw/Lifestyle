@@ -13,12 +13,21 @@
 <!-- Num elements: 10 -->
 <style>
     
+    .card2:hover{
+        border: 5px solid rgb(230, 4, 230);
+    }
+    
     body{
         background-color:black;
     }
 
-    a,a:link, a:visited, a:active {
-        text-decoration:none;
+    .link:hover {
+        border: 1px solid;
+        padding:2px;
+    }
+
+    .active{
+        border-bottom: 2px solid;
     }
 
 
@@ -56,34 +65,57 @@
     <!-- COMPONENT NAVBAR i tambe aplico la propietat rounded -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mt-2 rounded" >
         <div class="container-fluid">
-            <a href="/"><img src="imgs/logo.png" height="150px" style="position: relative;"></a>
+            <a href="/"><img src="{{ asset('imgs/logo.png') }}" height="150px" style="position: relative;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 offset-lg-1">
                 <!-- COMPONENT COLLAPSE -->
-                <a href="/contact" style="color:black; text-decoration: none;">Contacta'ns</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#novetats" role="button" aria-expanded="false" aria-controls="novetats" style="color:black; text-decoration: none;">Novetats</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#home" role="button" aria-expanded="false" aria-controls="home" style="color:black; text-decoration: none;">Home</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#dona" role="button" aria-expanded="false" aria-controls="dona" style="color:black; text-decoration: none;">Dona</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#nen" role="button" aria-expanded="false" aria-controls="nen" style="color:black; text-decoration: none;">Nen/a</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#ofertes" role="button" aria-expanded="false" aria-controls="ofertes" style="color:black; text-decoration: none;">Ofertes</a>
+                <li class="nav-item">
+                    <a href="/" class="link {{ request()->is('/') ? 'active' : '' }}" style="color:black; text-decoration: none;">Inici</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a href="/contact" class="link {{ request()->is('contact') ? 'active' : '' }}" style="color:black; text-decoration: none;">Contacta'ns</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('novetats') ? 'active' : '' }}" href="#novetats" role="button" aria-expanded="false" aria-controls="novetats" style="color:black; text-decoration: none;">Novetats</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('home') ? 'active' : '' }}" href="#home" role="button" aria-expanded="false" aria-controls="home" style="color:black; text-decoration: none;">Home</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('dona') ? 'active' : '' }}" href="#dona" role="button" aria-expanded="false" aria-controls="dona" style="color:black; text-decoration: none;">Dona</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('nen') ? 'active' : '' }}" href="#nen" role="button" aria-expanded="false" aria-controls="nen" style="color:black; text-decoration: none;">Nen/a</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('ofertes') ? 'active' : '' }}" href="#ofertes" role="button" aria-expanded="false" aria-controls="ofertes" style="color:black; text-decoration: none;">Ofertes</a>
+                </li>
             </ul>
             <!-- Aqui utilitzo la propietat flex -->
-            <form class="d-flex" style="margin-right:50px;">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form action="{{ route('shop.index') }}" method="get" class="d-flex" style="margin-right:50px;">
+
+                @csrf
+
+                @if (isset($search))
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Search" value="{{ $search }}">
+                @else
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Search">
+                @endif
                 <!-- COMPONENT BUTTON -->
-                <button class="btn btn-outline-success" id="browseBtn" type="submit">Search</button>
+                <button class="btn btn-outline-success" id="browseBtn" type="submit">Buscar</button>
             </form>
 
             @guest
-                <a href="/login"><i class="bi bi-box-arrow-in-right login"></i></a>&nbsp&nbsp
+                <a href="/login"><i class="bi bi-box-arrow-in-right login" style="text-decoration: none;"></i></a>&nbsp&nbsp
             @endguest
             
             @auth
@@ -94,8 +126,8 @@
                 @csrf
             </form>
 
-            <a href="/favs"><i class="bi bi-heart fav"></i></a>&nbsp&nbsp
-            <a href="/cart">
+            <a href="/favs"><i class="bi bi-heart fav" style="text-decoration: none;"></i></a>&nbsp&nbsp
+            <a href="/cart" style="text-decoration: none;">
                 <i class="bi bi-bag bag"></i>
                 <!-- COMPONENT BADGE -->
                 <span class="top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:10px;">
@@ -114,19 +146,19 @@
                 <div class="row justify-content-around">
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Novetats per a home</a></b>
+                        <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a home</a></b>
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Novetats per a dona</a></b>
+                        <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a dona</a></b>
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Novetats per a nen/a</a></b>
+                        <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a nen/a</a></b>
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Novetats per marca</a></b>
+                        <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per marca</a></b>
                     </div>
 
                 </div>
@@ -139,34 +171,34 @@
                 <div class="row justify-content-around">
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Lifestyle</a></b>
+                        <b><a href="/home" style="color:black; text-decoration: none;">Lifestyle</a></b>
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Fútbol</a></b>
+                        <b><a href="/home" style="color:black; text-decoration: none;">Fútbol</a></b>
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Basquet</a></b>    
+                        <b><a href="/home" style="color:black; text-decoration: none;">Basquet</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Padel</a></b>    
+                        <b><a href="/home" style="color:black; text-decoration: none;">Padel</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Tenis</a></b>    
+                        <b><a href="/home" style="color:black; text-decoration: none;">Tenis</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                        <b><a href="/home" style="color:black; text-decoration: none;">Atletisme</a></b>    
                     </div>
 
                 </div>
 
                 <div class="row justify-content-start mt-lg-2">
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                        <b><a href="/home" style="color:black; text-decoration: none;">Skateboard</a></b>    
                     </div>
                 </div>
             </div>
@@ -178,34 +210,34 @@
                 <div class="row justify-content-around">
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Lifestyle</a></b>    
+                        <b><a href="/dona" style="color:black; text-decoration: none;">Lifestyle</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Fútbol</a></b>    
+                        <b><a href="/dona" style="color:black; text-decoration: none;">Fútbol</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Basquet</a></b>    
+                        <b><a href="/dona" style="color:black; text-decoration: none;">Basquet</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Padel</a></b>    
+                        <b><a href="/dona" style="color:black; text-decoration: none;">Padel</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Tenis</a></b>    
+                        <b><a href="/dona" style="color:black; text-decoration: none;">Tenis</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                        <b><a href="/dona" style="color:black; text-decoration: none;">Atletisme</a></b>    
                     </div>
 
                 </div>
 
                 <div class="row justify-content-start mt-lg-2">
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                        <b><a href="/dona" style="color:black; text-decoration: none;">Skateboard</a></b>    
                     </div>
                 </div>
             </div>
@@ -217,34 +249,34 @@
                 <div class="row justify-content-around">
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Lifestyle</a></b>    
+                        <b><a href="/nen" style="color:black; text-decoration: none;">Lifestyle</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Fútbol</a></b>    
+                        <b><a href="/nen" style="color:black; text-decoration: none;">Fútbol</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Basquet</a></b>    
+                        <b><a href="/nen" style="color:black; text-decoration: none;">Basquet</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Padel</a></b>    
+                        <b><a href="/nen" style="color:black; text-decoration: none;">Padel</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Tenis</a></b>    
+                        <b><a href="/nen" style="color:black; text-decoration: none;">Tenis</a></b>    
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                        <b><a href="/nen" style="color:black; text-decoration: none;">Atletisme</a></b>    
                     </div>
 
                 </div>
 
                 <div class="row justify-content-start mt-lg-2">
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                        <b><a href="/nen" style="color:black; text-decoration: none;">Skateboard</a></b>    
                     </div>
                 </div>
 
@@ -257,19 +289,19 @@
                 <div class="row justify-content-around">
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Ofertes per a home</a></b>
+                        <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a home</a></b>
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Ofertes per a dona</a></b>
+                        <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a dona</a></b>
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Ofertes per a nen/a</a></b>
+                        <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a nen/a</a></b>
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Ofertes per marca</a></b>
+                        <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per marca</a></b>
                     </div>
 
                 </div>
@@ -300,9 +332,9 @@
                                 <h2 class="footer-heading">Quant a nosaltres</h2>
                                 <p style="color:black;">Som una petita botiga online de les millors sabates</p>
                                 <ul class="ftco-footer-social p-0">
-                                    <li class="ftco-animate"><a href="/shop" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="bi bi-twitter" style="margin-left: 10px; font-size:20px"></i></a></li>
-                                    <li class="ftco-animate"><a href="/shop" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="bi bi-facebook" style="margin-left: 10px; font-size:20px"></i></a></li>
-                                    <li class="ftco-animate"><a href="/shop" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram"><i class="bi bi-instagram" style="margin-left: 10px; font-size:20px"></i></a></li>
+                                    <li class="ftco-animate"><a href="https://twitter.com" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="bi bi-twitter" style="margin-left: 10px; font-size:20px"></i></a></li>
+                                    <li class="ftco-animate"><a href="https://www.instagram.com" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="bi bi-facebook" style="margin-left: 10px; font-size:20px"></i></a></li>
+                                    <li class="ftco-animate"><a href="https://www.instagram.com" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram"><i class="bi bi-instagram" style="margin-left: 10px; font-size:20px"></i></a></li>
                                 </ul>
                             </div>
                             <div class="col-md-8">
@@ -401,10 +433,10 @@
 
     <script>
 
-        document.querySelector("#browseBtn").onclick = function(e) {
-            e.preventDefault();
-            new bootstrap.Toast(document.querySelector('#toastBasic')).show();
-        }
+        // document.querySelector("#browseBtn").onclick = function(e) {
+        //     e.preventDefault();
+        //     new bootstrap.Toast(document.querySelector('#toastBasic')).show();
+        // }
 
         document.querySelector("#btnClose").onclick = function(e) {
             e.preventDefault();

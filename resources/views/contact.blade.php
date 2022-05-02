@@ -17,8 +17,13 @@
         background-color:black;
     }
 
-    a,a:link, a:visited, a:active {
-        text-decoration:none;
+    .link:hover {
+        border: 1px solid;
+        padding:2px;
+    }
+
+    .active{
+        border-bottom: 2px solid;
     }
 
 
@@ -61,23 +66,47 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 offset-lg-1">
                 <!-- COMPONENT COLLAPSE -->
-                <a href="/contact" style="color:black; text-decoration: none;">Contacta'ns</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#novetats" role="button" aria-expanded="false" aria-controls="novetats" style="color:black; text-decoration: none;">Novetats</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#home" role="button" aria-expanded="false" aria-controls="home" style="color:black; text-decoration: none;">Home</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#dona" role="button" aria-expanded="false" aria-controls="dona" style="color:black; text-decoration: none;">Dona</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#nen" role="button" aria-expanded="false" aria-controls="nen" style="color:black; text-decoration: none;">Nen/a</a>
-                &nbsp&nbsp
-                <a data-bs-toggle="collapse" href="#ofertes" role="button" aria-expanded="false" aria-controls="ofertes" style="color:black; text-decoration: none;">Ofertes</a>
+                <li class="nav-item">
+                    <a href="/" class="link {{ request()->is('/') ? 'active' : '' }}" style="color:black; text-decoration: none;">Inici</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a href="/contact" class="link {{ request()->is('contact') ? 'active' : '' }}" style="color:black; text-decoration: none;">Contacta'ns</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('novetats') ? 'active' : '' }}" href="#novetats" role="button" aria-expanded="false" aria-controls="novetats" style="color:black; text-decoration: none;">Novetats</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('home') ? 'active' : '' }}" href="#home" role="button" aria-expanded="false" aria-controls="home" style="color:black; text-decoration: none;">Home</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('dona') ? 'active' : '' }}" href="#dona" role="button" aria-expanded="false" aria-controls="dona" style="color:black; text-decoration: none;">Dona</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('nen') ? 'active' : '' }}" href="#nen" role="button" aria-expanded="false" aria-controls="nen" style="color:black; text-decoration: none;">Nen/a</a>
+                </li>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" class="link {{ request()->is('ofertes') ? 'active' : '' }}" href="#ofertes" role="button" aria-expanded="false" aria-controls="ofertes" style="color:black; text-decoration: none;">Ofertes</a>
+                </li>
             </ul>
             <!-- Aqui utilitzo la propietat flex -->
-            <form class="d-flex" style="margin-right:50px;">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form action="{{ route('shop.index') }}" method="get" class="d-flex" style="margin-right:50px;">
+
+                @csrf
+
+                @if (isset($search))
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Search" value="{{ $search }}">
+                @else
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Search">
+                @endif
                 <!-- COMPONENT BUTTON -->
-                <button class="btn btn-outline-success" id="browseBtn" type="submit">Search</button>
+                <button class="btn btn-outline-success" id="browseBtn" type="submit">Buscar</button>
+
             </form>
 
             @guest
@@ -106,173 +135,172 @@
     </nav>
 
     <!-- COMPONENT COLLAPSE -->
-        <!-- NOVETATS -->
-        <div class="collapse" id="novetats">
-            <div class="card card-body">
-                <div class="row justify-content-around">
+    <div class="collapse" id="novetats">
+        <div class="card card-body">
+            <div class="row justify-content-around">
 
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Novetats per a home</a></b>
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Novetats per a dona</a></b>
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Novetats per a nen/a</a></b>
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Novetats per marca</a></b>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- HOME -->
-        <div class="collapse" id="home">
-            <div class="card card-body">
-                <div class="row justify-content-around">
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Lifestyle</a></b>
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Fútbol</a></b>
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Basquet</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Padel</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Tenis</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Atletisme</a></b>    
-                    </div>
-
+                <div class="col-12 col-lg-2">
+                    <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a home</a></b>
                 </div>
 
-                <div class="row justify-content-start mt-lg-2">
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Skateboard</a></b>    
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DONA -->
-        <div class="collapse" id="dona">
-            <div class="card card-body">
-                <div class="row justify-content-around">
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Lifestyle</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Fútbol</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Basquet</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Padel</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Tenis</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Atletisme</a></b>    
-                    </div>
-
+                <div class="col-12 col-lg-2">
+                    <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a dona</a></b>
                 </div>
 
-                <div class="row justify-content-start mt-lg-2">
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Skateboard</a></b>    
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- NEN/A -->
-        <div class="collapse" id="nen">
-            <div class="card card-body">
-                <div class="row justify-content-around">
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Lifestyle</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Fútbol</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Basquet</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Padel</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Tenis</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Atletisme</a></b>    
-                    </div>
-
+                <div class="col-12 col-lg-2">
+                    <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a nen/a</a></b>
                 </div>
 
-                <div class="row justify-content-start mt-lg-2">
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Skateboard</a></b>    
-                    </div>
+                <div class="col-12 col-lg-2">
+                    <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per marca</a></b>
                 </div>
 
             </div>
         </div>
+    </div>
 
-        <!-- OFERTES -->
-        <div class="collapse" id="ofertes">
-            <div class="card card-body">
-                <div class="row justify-content-around">
+    <!-- HOME -->
+    <div class="collapse" id="home">
+        <div class="card card-body">
+            <div class="row justify-content-around">
 
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Ofertes per a home</a></b>
-                    </div>
+                <div class="col-12 col-lg-2">
+                    <b><a href="/home" style="color:black; text-decoration: none;">Lifestyle</a></b>
+                </div>
 
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Ofertes per a dona</a></b>
-                    </div>
+                <div class="col-12 col-lg-2">
+                    <b><a href="/home" style="color:black; text-decoration: none;">Fútbol</a></b>
+                </div>
 
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Ofertes per a nen/a</a></b>
-                    </div>
+                <div class="col-12 col-lg-2">
+                    <b><a href="/home" style="color:black; text-decoration: none;">Basquet</a></b>    
+                </div>
 
-                    <div class="col-12 col-lg-2">
-                        <b><a href="/shop" style="color:black; text-decoration: none;">Ofertes per marca</a></b>
-                    </div>
+                <div class="col-12 col-lg-2">
+                    <b><a href="/home" style="color:black; text-decoration: none;">Padel</a></b>    
+                </div>
 
+                <div class="col-12 col-lg-2">
+                    <b><a href="/home" style="color:black; text-decoration: none;">Tenis</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/home" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                </div>
+
+            </div>
+
+            <div class="row justify-content-start mt-lg-2">
+                <div class="col-12 col-lg-2">
+                    <b><a href="/home" style="color:black; text-decoration: none;">Skateboard</a></b>    
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- DONA -->
+    <div class="collapse" id="dona">
+        <div class="card card-body">
+            <div class="row justify-content-around">
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/dona" style="color:black; text-decoration: none;">Lifestyle</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/dona" style="color:black; text-decoration: none;">Fútbol</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/dona" style="color:black; text-decoration: none;">Basquet</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/dona" style="color:black; text-decoration: none;">Padel</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/dona" style="color:black; text-decoration: none;">Tenis</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/dona" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                </div>
+
+            </div>
+
+            <div class="row justify-content-start mt-lg-2">
+                <div class="col-12 col-lg-2">
+                    <b><a href="/dona" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEN/A -->
+    <div class="collapse" id="nen">
+        <div class="card card-body">
+            <div class="row justify-content-around">
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/nen" style="color:black; text-decoration: none;">Lifestyle</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/nen" style="color:black; text-decoration: none;">Fútbol</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/nen" style="color:black; text-decoration: none;">Basquet</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/nen" style="color:black; text-decoration: none;">Padel</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/nen" style="color:black; text-decoration: none;">Tenis</a></b>    
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/nen" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                </div>
+
+            </div>
+
+            <div class="row justify-content-start mt-lg-2">
+                <div class="col-12 col-lg-2">
+                    <b><a href="/nen" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- OFERTES -->
+    <div class="collapse" id="ofertes">
+        <div class="card card-body">
+            <div class="row justify-content-around">
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a home</a></b>
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a dona</a></b>
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a nen/a</a></b>
+                </div>
+
+                <div class="col-12 col-lg-2">
+                    <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per marca</a></b>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
             <div style="background-color: rgb(196, 194, 194); padding:20px; margin-top: 40px; margin-bottom:40px; border-radius: 7px;">
                 <form class="g-3" method="POST" action="{{ route('contact') }}" style="padding:20px;">
@@ -432,11 +460,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script>
-
-        document.querySelector("#browseBtn").onclick = function(e) {
-            e.preventDefault();
-            new bootstrap.Toast(document.querySelector('#toastBasic')).show();
-        }
 
         document.querySelector("#btnClose").onclick = function(e) {
             e.preventDefault();

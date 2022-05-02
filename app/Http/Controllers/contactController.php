@@ -39,7 +39,7 @@ class contactController extends Controller
     {
         $message = request()->validate([
             "name" => "required",
-            "email" => "required",
+            "email" => "required|email",
             "subject" => "required",
             "content" => "required"
         ]);

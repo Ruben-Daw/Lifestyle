@@ -26,9 +26,16 @@
     input:focus {
         border:1px solid #06c;
     }
+
+    body{
+        background-image: url({{ asset('imgs/fondo2.jpg')}}) ;
+        background-image-opacity:0.3;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 </style>
 
-<body style="background-color:black;">
+<body>
     @if(session()->has('message'))
 
         <div class="alert alert-success alert-dismissible fade show w-50" role="alert">
