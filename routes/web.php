@@ -5,13 +5,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\shopController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\adminController;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\contactController;
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -39,6 +39,12 @@ Route::get('/dona',[shopController::class,'index'])->middleware('auth.user');
 Route::get('/nen',[shopController::class,'index'])->middleware('auth.user');
 Route::get('/ofertes',[shopController::class,'index'])->middleware('auth.user');
 Route::get('/shop/{id}',[shopController::class,'show'])->middleware('auth.user')->name('shop.show');
+Route::get('/cart',[cartController::class,'index'])->middleware(['auth.user','verified'])->name('cart.index');
+Route::get('/cart/{user_id}/{product_id}/{size}/{quantity}',[cartController::class,'store'])->middleware(['auth.user','verified'])->name('cart.store');
+Route::delete('cart/{product_cart_id}', [cartController::class,'destroy'])->middleware(['auth.user','verified'])->name('cart.destroy');
+Route::patch('cart/{product_cart_id}', [cartController::class,'update'])->middleware(['auth.user','verified'])->name('cart.update');
+
+
 
 
 Route::get('/email/verify', function () {

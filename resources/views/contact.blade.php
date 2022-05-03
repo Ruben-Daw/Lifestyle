@@ -122,11 +122,11 @@
             </form>
 
             <a href="/favs"><i class="bi bi-heart fav"></i></a>&nbsp&nbsp
-            <a href="/cart">
+            <a href="/cart" style="text-decoration: none;">
                 <i class="bi bi-bag bag"></i>
                 <!-- COMPONENT BADGE -->
                 <span class="top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:10px;">
-                    24
+                    {{getProductsCartNum()}}
                     <span class="visually-hidden">unread messages</span>
                 </span>
             </a>

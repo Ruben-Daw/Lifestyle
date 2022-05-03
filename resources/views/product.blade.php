@@ -92,7 +92,7 @@
 
                 </div>
                 
-                <button class="btn btn-dark w-75 mt-4">Afegir al carrito</button>
+                <a href="/cart/{{auth()->id()}}/{{$product->product_id}}/{{$size}}/1" class="btn btn-dark w-75 mt-4">Afegir al carrito</a>
                 <button class="btn w-15 mt-4" style="border: 1px solid"><i class="bi bi-heart" style="font-size: 15px; color: red;"></i></button>
             </div>
 

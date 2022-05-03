@@ -48,10 +48,19 @@
     .bag{
         color: black;
     }
-
+    
 </style>
 <body>
 <div class="container">
+
+    @if(session()->has('success'))
+
+        <div class="alert alert-warning alert-dismissible fade show w-50" role="alert">
+            <i class="bi bi-exclamation-triangle" style="margin-right:10px; font-size:20px;"></i>{{ session()->get('success') }}<a href="/cart">Canvia la quantitat del producte</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    @endif
 
     @if(session()->has('message'))
 
@@ -131,7 +140,7 @@
                 <i class="bi bi-bag bag"></i>
                 <!-- COMPONENT BADGE -->
                 <span class="top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:10px;">
-                    24
+                    {{getProductsCartNum()}}
                     <span class="visually-hidden">unread messages</span>
                 </span>
             </a>
