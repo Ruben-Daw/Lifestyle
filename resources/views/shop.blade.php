@@ -374,7 +374,6 @@
 
                     <select class="btn" style="background-color:black; color:white; border-radius:6px;" name="order" id="order" onchange="document.getElementById('shop-form').submit()">
                         <option value="default" hidden="true" selected>Ordenar per: {{ $order }}</option>
-                        <option value="destacats">Destacats</option>
                         <option value="baix-alt">Preu(baix-alt)</option>
                         <option value="alt-baix">Preu(alt-baix)</option>
                     </select>
@@ -390,17 +389,44 @@
                 
                 <div class="col-6 col-lg-3 mb-4"> 
 
-                    <a href="{{ route('shop.show', $product->product_id) }}" style="text-decoration: none; color:black;" >
+                    
                         <div class="card card2">
-                            <i class="bi bi-heart fav" style="color:red; display:flex; justify-content:end; margin-top:20px; margin-right:20px;"></i>
-                            <img src="imgs/{{ $product->url }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
-                            <p class="card-text">{{ $product->categoryName }}</p>
-                            <p>{{ $product->price }}€</p>
-                            </div>
+                            <form action="{{ route('favorites.store', [auth()->id(),$product->product_id]) }}" method="get" class="d-flex" id="fav-auth{{$product->product_id}}">
+                                @csrf
+                            </form>
+
+                            <form action="{{ route('favorites.store', [0,$product->product_id]) }}" method="get" class="d-flex" id="fav-noAuth{{$product->product_id}}">
+                                @csrf
+                            </form>
+
+                            <form action="{{ route('favorites.destroy', $product->product_id) }}" method="post" class="d-flex" id="fav-delete{{$product->product_id}}">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+
+                            @if (!favoriteProductExists($product->product_id))
+                                
+                                @auth()
+                                    <i class="bi bi-heart fav" style="color:red; display:flex; justify-content:end; margin-top:20px; margin-right:20px;" onclick="document.getElementById('fav-auth{{$product->product_id}}').submit()"></i>
+                                @else
+                                    <i class="bi bi-heart fav" style="color:red; display:flex; justify-content:end; margin-top:20px; margin-right:20px;" onclick="document.getElementById('fav-noAuth{{$product->product_id}}').submit()"></i>
+                                @endauth
+
+                            @else
+                                <i class="bi bi-heart-fill" style="color:red; display:flex; justify-content:end; margin-top:20px; margin-right:20px;" onclick="document.getElementById('fav-delete{{$product->product_id}}').submit()"></i>
+
+                            @endif
+                            <a href="{{ route('shop.show', $product->product_id) }}" style="text-decoration: none; color:black;" >
+                
+                                <img src="imgs/{{ $product->url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p class="card-text">{{ $product->categoryName }}</p>
+                                <p>{{ $product->price }}€</p>
+                                </div>
+
+                            </a>
                         </div>
-                    </a>
                     
                 </div>
                 

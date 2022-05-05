@@ -18,4 +18,26 @@ use Illuminate\Support\Facades\DB;
             ->sum(DB::raw('p.price * pc.quantity'));
     }
 
+    function favoriteProductExists($product_id)
+    {
+        $exists = DB::table('favorite_products')
+            ->where('user_id','=',auth()->id())
+            ->where('product_id','=',$product_id)
+            ->get()
+            ->toarray();
+
+        if(sizeof($exists) == 0){
+            return false;
+        }
+
+        return true;
+    }
+
+    function getFavoriteProductsNum()
+    {
+        return DB::table('favorite_products')
+        ->where('user_id','=',auth()->id())
+        ->count();
+    }
+
 ?>

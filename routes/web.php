@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\adminController;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\contactController;
+use App\Http\Controllers\favoritesController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -40,9 +41,12 @@ Route::get('/nen',[shopController::class,'index'])->middleware('auth.user');
 Route::get('/ofertes',[shopController::class,'index'])->middleware('auth.user');
 Route::get('/shop/{id}',[shopController::class,'show'])->middleware('auth.user')->name('shop.show');
 Route::get('/cart',[cartController::class,'index'])->middleware(['auth.user','verified'])->name('cart.index');
-Route::get('/cart/{user_id}/{product_id}/{size}/{quantity}',[cartController::class,'store'])->middleware(['auth.user','verified'])->name('cart.store');
+Route::get('/cart/{user_id}/{product_id}/{size}/{quantity}',[cartController::class,'store'])->middleware(['auth.user', 'verified'])->name('cart.store');
 Route::delete('cart/{product_cart_id}', [cartController::class,'destroy'])->middleware(['auth.user','verified'])->name('cart.destroy');
 Route::patch('cart/{product_cart_id}', [cartController::class,'update'])->middleware(['auth.user','verified'])->name('cart.update');
+Route::get('/favorites', [favoritesController::class,'index'])->middleware(['auth.user','verified'])->name('favorites.index');
+Route::get('/favorites/{user_id?}/{product_id?}}',[favoritesController::class,'store'])->middleware(['auth.user', 'verified'])->name('favorites.store');
+Route::delete('favorites/{product_id}', [favoritesController::class,'destroy'])->middleware(['auth.user','verified'])->name('favorites.destroy');
 
 
 

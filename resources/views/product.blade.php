@@ -92,8 +92,42 @@
 
                 </div>
                 
-                <a href="/cart/{{auth()->id()}}/{{$product->product_id}}/{{$size}}/1" class="btn btn-dark w-75 mt-4">Afegir al carrito</a>
-                <button class="btn w-15 mt-4" style="border: 1px solid"><i class="bi bi-heart" style="font-size: 15px; color: red;"></i></button>
+                @auth()
+                    <a href="/cart/{{auth()->id()}}/{{$product->product_id}}/{{$size}}/1" class="btn btn-dark w-75 mt-4">Afegir al carrito</a>
+                @else
+                    <a href="/cart/null/{{$product->product_id}}/{{$size}}/1" class="btn btn-dark w-75 mt-4">Afegir al carrito</a>
+                @endauth
+
+
+                @if (!favoriteProductExists($product->product_id))
+                                
+                    @auth()
+                        <i class="bi bi-heart fav" style="color:red; float:right; font-size:40px" onclick="document.getElementById('fav-auth{{$product->product_id}}').submit()"></i>
+                    @else
+                        <i class="bi bi-heart fav" style="color:red; float:right; font-size:40px" onclick="document.getElementById('fav-noAuth{{$product->product_id}}').submit()"></i>
+                    @endauth
+
+                @else
+
+                <i class="bi bi-heart-fill" style="color:red; float:right; font-size:40px" onclick="document.getElementById('fav-delete{{$product->product_id}}').submit()"></i>
+            
+                @endif
+
+
+                <form action="{{ route('favorites.store', [auth()->id(),$product->product_id]) }}" method="get" class="d-flex" id="fav-auth{{$product->product_id}}">
+                    @csrf
+                </form>
+
+                <form action="{{ route('favorites.store', [0,$product->product_id]) }}" method="get" class="d-flex" id="fav-noAuth{{$product->product_id}}">
+                    @csrf
+                </form>
+
+                <form action="{{ route('favorites.destroy', $product->product_id) }}" method="post" class="d-flex" id="fav-delete{{$product->product_id}}">
+                    @csrf
+                    @method('DELETE')
+                </form>
+                
+
             </div>
 
             <div class="col-lg-8" style="border-right: 3px solid ;">
