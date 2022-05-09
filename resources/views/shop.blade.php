@@ -417,8 +417,15 @@
 
                             @endif
                             <a href="{{ route('shop.show', $product->product_id) }}" style="text-decoration: none; color:black;" >
-                
-                                <img src="imgs/{{ $product->url }}" class="card-img-top" alt="...">
+                                @foreach ($imageProducts as $imgP)
+
+                                    @if ($product->product_id == $imgP->product_id)
+
+                                        <img src="imgs/{{ $imgP->url }}" class="card-img-top" alt="...">
+                                        
+                                    @endif
+                                    
+                                @endforeach
                                 <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <p class="card-text">{{ $product->categoryName }}</p>

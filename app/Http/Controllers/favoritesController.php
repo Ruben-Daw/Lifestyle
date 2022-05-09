@@ -56,6 +56,7 @@ class favoritesController extends Controller
     {
         $productFavsExists = DB::table('favorite_products')
             ->where('product_id','=',$product_id)
+            ->where('user_id', '=', $user_id)
             ->get()
             ->toarray();
 

@@ -33,8 +33,7 @@ class shopController extends Controller
         $order = trim($request->get('order'));
 
         $products = DB::table('products as p')
-            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'i.url as url','c.name as categoryName')
-            ->join('images_products as i','p.product_id','=','i.product_id')
+            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
             ->join('categories as c','p.category_id','=','c.category_id')
             ->where('p.name','LIKE','%'.$search.'%')
             ->orWhere('c.name','LIKE','%'.$search.'%')
@@ -44,8 +43,7 @@ class shopController extends Controller
         if($order == 'baix-alt')
         {
             $products = DB::table('products as p')
-                ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'i.url as url','c.name as categoryName')
-                ->join('images_products as i','p.product_id','=','i.product_id')
+                ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
                 ->join('categories as c','p.category_id','=','c.category_id')
                 ->where('p.name','LIKE','%'.$search.'%')
                 ->orWhere('c.name','LIKE','%'.$search.'%')
@@ -57,8 +55,7 @@ class shopController extends Controller
         else if($order == 'alt-baix')
         {
             $products = DB::table('products as p')
-                ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'i.url as url','c.name as categoryName')
-                ->join('images_products as i','p.product_id','=','i.product_id')
+                ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
                 ->join('categories as c','p.category_id','=','c.category_id')
                 ->where('p.name','LIKE','%'.$search.'%')
                 ->orWhere('c.name','LIKE','%'.$search.'%')
@@ -67,7 +64,13 @@ class shopController extends Controller
                 ->paginate(10);
         }
 
-        return view('shop', compact('products','search','order'));
+        $imageProducts = DB::table('images_products')
+            ->where('primary','=','True')
+            ->get()
+            ->toarray();
+
+
+        return view('shop', compact('products','imageProducts','search','order'));
 
     }
 

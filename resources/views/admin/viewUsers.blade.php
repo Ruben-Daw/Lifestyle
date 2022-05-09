@@ -53,7 +53,7 @@
                     <td>{{strip_tags($user->name)}}</td>
                     <td>{{strip_tags($user->last_names)}}</td>
                     <td>{{$user->email}}</td>
-                    <td><a onclick="return confirm('Estas segur?')" href="{{ route('users.destroy', $user->user_id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Donar de naixa usuari"><i class="bi bi-x-square" style="color: white;"></i></a></td>
+                    <td><a onclick="return confirm('Estas segur?')" href="{{ route('users.destroy', $user->user_id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Esborrar usuari"><i class="bi bi-x-square" style="color: white;"></i></a></td>
                 </tr>
             @empty
                 <script>

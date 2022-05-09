@@ -72,7 +72,7 @@ class cartController extends Controller
         }
         else
         {
-            return redirect()->route('shop.index')->withSuccess('Ja tens aquest producte amb aquesta talla al teu carrito. ');
+            return redirect()->route('shop.index')->withSuccess('Ja tens aquest producte amb aquesta talla al teu carrito.');
         }
 
         return redirect()->route('cart.index');
@@ -109,10 +109,30 @@ class cartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Cart::find($id)->update([
-            'size' => $request->get('talla'),
-            'quantity' => $request->get('quantitat')
-        ]);
+
+        $product_id = DB::table('products_cart')
+            ->select('product_id')
+            ->where('product_cart_id', '=', $id)
+            ->get()
+            ->toarray()[0]->product_id;
+
+        $stock = DB::table('products_size')
+            ->select('stock')
+            ->where('product_id', '=', $product_id)
+            ->where('size', '=', $request->get('talla'))
+            ->get()
+            ->toarray()[0]->stock;
+
+        if($stock >=  $request->get('quantitat'))
+        {
+            Cart::find($id)->update([
+                'size' => $request->get('talla'),
+                'quantity' => $request->get('quantitat')
+            ]);
+        }
+        else{
+            redirect()->back()->withSuccess('La quantitat a escollir no pot ser major que el stock del producte');
+        }
 
         return redirect()->route('cart.index');
     }
