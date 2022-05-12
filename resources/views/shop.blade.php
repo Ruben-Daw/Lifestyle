@@ -975,4 +975,6 @@
             @endforelse
         </div>
     </div>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{{ asset('js/shop.js')}}"></script>
 @endsection

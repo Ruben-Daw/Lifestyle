@@ -9,8 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="{{ asset('js/shop.js')}}"></script>
 </head>
 <!-- Num elements: 10 -->
 <style>
@@ -60,7 +58,10 @@
         bottom:10px;
         right:20px;
     }
-    
+
+    .dropdown-toggle::after {
+            content: none;
+    }
 </style>
 <body>
 <div class="container">
@@ -140,8 +141,21 @@
             @endguest
             
             @auth
-            <a href="/login" onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i class="bi bi-box-arrow-in-left"></i></a>&nbsp&nbsp
+            <div class="dropdown show">
+                <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none; content: none;">
+                    <i class="bi bi-person-circle" style="font-size:30px; color:black;"></i>
+                </a>
+              
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="/account" style="text-decoration: none; color:black;">El meu compte</a>
+                  <a class="dropdown-item" href="{{ route('password.request') }}" style="text-decoration: none; color:black;">Cambiar contrasenya</a>
+                  <a class="dropdown-item" href="/login" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" style="text-decoration: none; color:black;">Tancar sessió</a>
+                </div>
+              </div>
+            &nbsp&nbsp
             @endauth
+
+            
 
             <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
                 @csrf

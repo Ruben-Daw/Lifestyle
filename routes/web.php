@@ -13,6 +13,7 @@ use App\Http\Controllers\adminController;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\favoritesController;
+use App\Http\Controllers\userAccountController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -43,6 +44,10 @@ Route::patch('cart/{product_cart_id}', [cartController::class,'update'])->middle
 Route::get('/favorites', [favoritesController::class,'index'])->middleware(['auth.user','verified'])->name('favorites.index');
 Route::get('/favorites/{user_id?}/{product_id?}}',[favoritesController::class,'store'])->middleware(['auth.user', 'verified'])->name('favorites.store');
 Route::delete('favorites/{product_id}', [favoritesController::class,'destroy'])->middleware(['auth.user','verified'])->name('favorites.destroy');
+Route::get('/account', [userAccountController::class,'index'])->middleware(['auth.user','verified'])->name('userAccount.index');
+Route::get('/editEmail', [userAccountController::class,'editEmail'])->middleware(['auth.user','verified'])->name('userAccount.editEmail');
+Route::get('/editUserPersonal', [userAccountController::class,'editUserPersonalData'])->middleware(['auth.user','verified'])->name('userAccount.editUserPersonalData');
+
 
 
 

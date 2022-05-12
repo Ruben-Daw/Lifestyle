@@ -116,4 +116,5 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('js/account.js')}}"></script>
 @endsection
