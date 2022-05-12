@@ -33,13 +33,9 @@ Route::view('/contact', 'contact')->middleware('auth.user')->name('contact');
 Route::get('/admin/users', [userController::class,'index'])->middleware('auth.admin')->name('users.index');
 Route::get('/admin/users/{userId}', [userController::class,'destroy'])->middleware('auth.admin')->name('users.destroy');
 
-Route::get('/shop',[shopController::class,'index'])->middleware('auth.user')->name('shop.index');
-Route::get('/novetats',[shopController::class,'index'])->middleware('auth.user');
-Route::get('/home',[shopController::class,'index'])->middleware('auth.user');
-Route::get('/dona',[shopController::class,'index'])->middleware('auth.user');
-Route::get('/nen',[shopController::class,'index'])->middleware('auth.user');
+Route::get('/shop/{category?}/{type?}',[shopController::class,'index'])->middleware('auth.user')->name('shop.index');
 Route::get('/ofertes',[shopController::class,'index'])->middleware('auth.user');
-Route::get('/shop/{id}',[shopController::class,'show'])->middleware('auth.user')->name('shop.show');
+Route::get('/product/{id}',[shopController::class,'show'])->middleware('auth.user')->name('shop.show');
 Route::get('/cart',[cartController::class,'index'])->middleware(['auth.user','verified'])->name('cart.index');
 Route::get('/cart/{user_id}/{product_id}/{size}/{quantity}',[cartController::class,'store'])->middleware(['auth.user', 'verified'])->name('cart.store');
 Route::delete('cart/{product_cart_id}', [cartController::class,'destroy'])->middleware(['auth.user','verified'])->name('cart.destroy');

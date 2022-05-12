@@ -146,19 +146,19 @@
             <div class="row justify-content-around">
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a home</a></b>
+                    <b><a href="/shop/novetats/home" style="color:black; text-decoration: none;">Novetats per a home</a></b>
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a dona</a></b>
+                    <b><a href="/shop/novetats/dona" style="color:black; text-decoration: none;">Novetats per a dona</a></b>
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per a nen/a</a></b>
+                    <b><a href="/shop/novetats/nen" style="color:black; text-decoration: none;">Novetats per a nen/a</a></b>
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/novetats" style="color:black; text-decoration: none;">Novetats per marca</a></b>
+                    <b><a href="/shop/novetats/marca" style="color:black; text-decoration: none;">Novetats per marca</a></b>
                 </div>
 
             </div>
@@ -171,34 +171,34 @@
             <div class="row justify-content-around">
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/home" style="color:black; text-decoration: none;">Lifestyle</a></b>
+                    <b><a href="/shop/lifestyle/home" style="color:black; text-decoration: none;">Lifestyle</a></b>
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/home" style="color:black; text-decoration: none;">Fútbol</a></b>
+                    <b><a href="/shop/futbol/home" style="color:black; text-decoration: none;">Fútbol</a></b>
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/home" style="color:black; text-decoration: none;">Basquet</a></b>    
+                    <b><a href="/shop/basquet/home" style="color:black; text-decoration: none;">Basquet</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/home" style="color:black; text-decoration: none;">Padel</a></b>    
+                    <b><a href="/shop/padel/home" style="color:black; text-decoration: none;">Padel</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/home" style="color:black; text-decoration: none;">Tenis</a></b>    
+                    <b><a href="/shop/tenis/home" style="color:black; text-decoration: none;">Tenis</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/home" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                    <b><a href="/shop/atletisme/home" style="color:black; text-decoration: none;">Atletisme</a></b>    
                 </div>
 
             </div>
 
             <div class="row justify-content-start mt-lg-2">
                 <div class="col-12 col-lg-2">
-                    <b><a href="/home" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                    <b><a href="/shop/skate/home" style="color:black; text-decoration: none;">Skateboard</a></b>    
                 </div>
             </div>
         </div>
@@ -210,34 +210,34 @@
             <div class="row justify-content-around">
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/dona" style="color:black; text-decoration: none;">Lifestyle</a></b>    
+                    <b><a href="/shop/lifestyle/dona" style="color:black; text-decoration: none;">Lifestyle</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/dona" style="color:black; text-decoration: none;">Fútbol</a></b>    
+                    <b><a href="/shop/futbol/dona" style="color:black; text-decoration: none;">Fútbol</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/dona" style="color:black; text-decoration: none;">Basquet</a></b>    
+                    <b><a href="/shop/basquet/dona" style="color:black; text-decoration: none;">Basquet</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/dona" style="color:black; text-decoration: none;">Padel</a></b>    
+                    <b><a href="/shop/padel/dona" style="color:black; text-decoration: none;">Padel</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/dona" style="color:black; text-decoration: none;">Tenis</a></b>    
+                    <b><a href="/shop/tenis/dona" style="color:black; text-decoration: none;">Tenis</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/dona" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                    <b><a href="/shop/atletisme/dona" style="color:black; text-decoration: none;">Atletisme</a></b>    
                 </div>
 
             </div>
 
             <div class="row justify-content-start mt-lg-2">
                 <div class="col-12 col-lg-2">
-                    <b><a href="/dona" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                    <b><a href="/shop/skate/dona" style="color:black; text-decoration: none;">Skateboard</a></b>    
                 </div>
             </div>
         </div>
@@ -249,34 +249,34 @@
             <div class="row justify-content-around">
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/nen" style="color:black; text-decoration: none;">Lifestyle</a></b>    
+                    <b><a href="/shop/lifestyle/nen" style="color:black; text-decoration: none;">Lifestyle</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/nen" style="color:black; text-decoration: none;">Fútbol</a></b>    
+                    <b><a href="/shop/futbol/nen" style="color:black; text-decoration: none;">Fútbol</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/nen" style="color:black; text-decoration: none;">Basquet</a></b>    
+                    <b><a href="/shop/basquet/nen" style="color:black; text-decoration: none;">Basquet</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/nen" style="color:black; text-decoration: none;">Padel</a></b>    
+                    <b><a href="/shop/padel/nen" style="color:black; text-decoration: none;">Padel</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/nen" style="color:black; text-decoration: none;">Tenis</a></b>    
+                    <b><a href="/shop/tenis/nen" style="color:black; text-decoration: none;">Tenis</a></b>    
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/nen" style="color:black; text-decoration: none;">Atletisme</a></b>    
+                    <b><a href="/shop/atletisme/nen" style="color:black; text-decoration: none;">Atletisme</a></b>    
                 </div>
 
             </div>
 
             <div class="row justify-content-start mt-lg-2">
                 <div class="col-12 col-lg-2">
-                    <b><a href="/nen" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                    <b><a href="/shop/skate/nen" style="color:black; text-decoration: none;">Skateboard</a></b>    
                 </div>
             </div>
 
@@ -289,19 +289,19 @@
             <div class="row justify-content-around">
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a home</a></b>
+                    <b><a href="/shop/ofertes/home" style="color:black; text-decoration: none;">Ofertes per a home</a></b>
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a dona</a></b>
+                    <b><a href="/shop/ofertes/dona" style="color:black; text-decoration: none;">Ofertes per a dona</a></b>
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per a nen/a</a></b>
+                    <b><a href="/shop/ofertes/nen" style="color:black; text-decoration: none;">Ofertes per a nen/a</a></b>
                 </div>
 
                 <div class="col-12 col-lg-2">
-                    <b><a href="/ofertes" style="color:black; text-decoration: none;">Ofertes per marca</a></b>
+                    <b><a href="/shop/ofertes/marca" style="color:black; text-decoration: none;">Ofertes per marca</a></b>
                 </div>
 
             </div>
@@ -403,46 +403,55 @@
                                             <div class="col-md-4 mb-md-0 mb-4">
                                                 <h2 class="footer-heading">Novetats</h2>
                                                 <ul class="list-unstyled">
-                                                    <li><b><a href="/shop" class="py-1 d-block">Novetats per home</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">Novetats per dona</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">Novetats per Nen/a</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">Novetats per marca</a></b></li>
+                                                    <li><b><a href="/shop/novetats/home" class="py-1 d-block">Novetats per home</a></b></li>
+                                                    <li><b><a href="/shop/novetats/dona" class="py-1 d-block">Novetats per dona</a></b></li>
+                                                    <li><b><a href="/shop/novetats/nen" class="py-1 d-block">Novetats per Nen/a</a></b></li>
+                                                    <li><b><a href="/shop/novetats/marca" class="py-1 d-block">Novetats per marca</a></b></li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-4 mb-md-0 mb-4">
                                                 <h2 class="footer-heading">Home</h2>
                                                 <ul class="list-unstyled">
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus1</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus2</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus3</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus4</a></b></li>
+                                                    <li><b><a href="/shop/lifestyle/home" class="py-1 d-block">Lifestyle</a></b></li>
+                                                    <li><b><a href="/shop/futbol/home" class="py-1 d-block">Fútbol</a></b></li>
+                                                    <li><b><a href="/shop/basquet/home" class="py-1 d-block">Basquet</a></b></li>
+                                                    <li><b><a href="/shop/padel/home" class="py-1 d-block">Padel</a></b></li>
+                                                    <li><b><a href="/shop/tenis/home" class="py-1 d-block">Tenis</a></b></li>
+                                                    <li><b><a href="/shop/atletisme/home" class="py-1 d-block">Atletisme</a></b></li>
+                                                    <li><b><a href="/shop/skate/home" class="py-1 d-block">Skateboard</a></b></li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-4 mb-md-0 mb-4">
                                                 <h2 class="footer-heading">Dona</h2>
-                                                <ul class="list-unstyled">
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus1</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus2</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus3</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus4</a></b></li>
+                                                <ul class="list-unstyled">                                                    
+                                                    <li><b><a href="/shop/lifestyle/dona" class="py-1 d-block">Lifestyle</a></b></li>
+                                                    <li><b><a href="/shop/futbol/dona" class="py-1 d-block">Fútbol</a></b></li>
+                                                    <li><b><a href="/shop/basquet/dona" class="py-1 d-block">Basquet</a></b></li>
+                                                    <li><b><a href="/shop/padel/dona" class="py-1 d-block">Padel</a></b></li>
+                                                    <li><b><a href="/shop/tenis/dona" class="py-1 d-block">Tenis</a></b></li>
+                                                    <li><b><a href="/shop/atletisme/dona" class="py-1 d-block">Atletisme</a></b></li>
+                                                    <li><b><a href="/shop/skate/dona" class="py-1 d-block">Skateboard</a></b></li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-4 mb-md-0 mb-4">
                                                 <h2 class="footer-heading">Nen/a</h2>
                                                 <ul class="list-unstyled">
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus1</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus2</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus3</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">tipus4</a></b></li>
+                                                    <li><b><a href="/shop/lifestyle/nen" class="py-1 d-block">Lifestyle</a></b></li>
+                                                    <li><b><a href="/shop/futbol/nen" class="py-1 d-block">Fútbol</a></b></li>
+                                                    <li><b><a href="/shop/basquet/nen" class="py-1 d-block">Basquet</a></b></li>
+                                                    <li><b><a href="/shop/padel/nen" class="py-1 d-block">Padel</a></b></li>
+                                                    <li><b><a href="/shop/tenis/nen" class="py-1 d-block">Tenis</a></b></li>
+                                                    <li><b><a href="/shop/atletisme/nen" class="py-1 d-block">Atletisme</a></b></li>
+                                                    <li><b><a href="/shop/skate/nen" class="py-1 d-block">Skateboard</a></b></li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-4 mb-md-0 mb-4">
                                                 <h2 class="footer-heading">Ofertes</h2>
                                                 <ul class="list-unstyled">
-                                                    <li><b><a href="/shop" class="py-1 d-block">Ofertes per home</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">Ofertes per dona</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">Ofertes per Nen/a</a></b></li>
-                                                    <li><b><a href="/shop" class="py-1 d-block">Ofertes per marca</a></b></li>
+                                                    <li><b><a href="/shop/ofertes/home" class="py-1 d-block">Ofertes per home</a></b></li>
+                                                    <li><b><a href="/shop/ofertes/dona" class="py-1 d-block">Ofertes per dona</a></b></li>
+                                                    <li><b><a href="/shop/ofertes/nen" class="py-1 d-block">Ofertes per Nen/a</a></b></li>
+                                                    <li><b><a href="/shop/ofertes/marca" class="py-1 d-block">Ofertes per marca</a></b></li>
                                                 </ul>
                                             </div>
                                         </div>

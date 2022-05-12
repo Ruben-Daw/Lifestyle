@@ -16,15 +16,118 @@ class shopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $category = null, $type = null)
     {
 
+        // dd($request->get('price'));
+
         $search = "";
+        $products = "";
+        $sizes = [];
+        $categories = [];
+        $brands = [];
+        $minPrice = null;
+        $maxPrice = null;
+        $price = null;
+
+        if($request->get('talla')!==null )
+        {
+
+            if($request->get('talla')[0] === "totes")
+            {
+
+                for ($i=34; $i <= 47 ; $i++) { 
+                    array_push($sizes, $i);
+                }
+
+            }
+            else
+            {
+                $sizes = $request->get('talla');
+            }
+
+            
+
+        }
+        else
+        {
+            $sizes = null;
+        }
+
+        if($request->get('categories')!==null )
+        {
+
+            if($request->get('categories')[0] == 'totes')
+            {
+                $catBd = DB::table('categories')
+                    ->get()
+                    ->toarray();
+
+                foreach($catBd as $cat)
+                {
+                    array_push($categories, $cat->name);
+                }
+            }
+            else
+            {
+                $categories = $request->get('categories');
+            }
+
+        }
+        else
+        {
+            $categories = null;
+        }
+
+        if($request->get('marcas')!==null )
+        {
+
+            if($request->get('marcas')[0] === "totes")
+            {
+
+                $brands[0]='Nike';
+                $brands[1]='Adidas';
+                $brands[2]='Converse';
+                $brands[3]='New Balance';
+                $brands[4]='Puma';
+                $brands[5]='ASICS';
+                $brands[6]='FILA';
+                $brands[7]='Lacoste';
+
+            }
+            else
+            {
+                $brands = $request->get('marcas');
+            }
+
+            
+
+        }
+        else
+        {   
+            $brands = null;
+        }
+
+        if($request->get('preu')!==null )
+        {
+
+            $price = $request->get('preu');
+
+            if($request->get('preu') !== "+200" && $request->get('preu') !== 'tots')
+            {
+
+                $priceArray = explode('-',$request->get('preu'));
+                $minPrice = $priceArray[0];
+                $maxPrice = $priceArray[1];
+
+            }
+
+        }
 
         if($request->get('search') !== null)
         {
             $search = trim($request->get('search'));
-        }
+        } 
         else
         {
             $search = trim($request->get('searchOrder'));
@@ -32,36 +135,376 @@ class shopController extends Controller
 
         $order = trim($request->get('order'));
 
-        $products = DB::table('products as p')
-            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
-            ->join('categories as c','p.category_id','=','c.category_id')
-            ->where('p.name','LIKE','%'.$search.'%')
-            ->orWhere('c.name','LIKE','%'.$search.'%')
-            ->orWhere('p.brand','LIKE','%'.$search.'%')
-            ->paginate(10);
+        if($category == null && $type == null)
+        {
+            if($sizes!==null && $categories!==null && $brands!==null )
+            {
+                
+                if($request->get('preu') !== "+200" && $request->get('preu') !== "tots")
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->whereBetween('p.price',[$minPrice, $maxPrice])
+                        ->distinct()
+                        ->get();
+                }
+                else if($request->get('preu') == "tots")
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->where('p.price','>',0)
+                        ->distinct()
+                        ->get();
+                }
+                else
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->where('p.price','>',200)
+                        ->distinct()
+                        ->get();
+                }
+
+            }
+            else
+            {
+                $products = DB::table('products as p')
+                    ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                    ->join('categories as c','p.category_id','=','c.category_id')
+                    ->where('p.name','LIKE','%'.$search.'%')
+                    ->orWhere('c.name','LIKE','%'.$search.'%')
+                    ->orWhere('p.brand','LIKE','%'.$search.'%')
+                    ->get();
+                
+                
+            }
+        }
+        else
+        {
+            if($sizes!==null && $categories!==null && $brands!==null )
+            {
+                
+                if($request->get('preu') !== "+200" && $request->get('preu') !== "tots")
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->whereBetween('p.price',[$minPrice, $maxPrice])
+                        ->distinct()
+                        ->get();
+                }
+                else if($request->get('preu') == "tots")
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->where('p.price','>',0)
+                        ->distinct()
+                        ->get();
+                }
+                else
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->where('p.price','>',200)
+                        ->distinct()
+                        ->get();
+                }
+
+            }
+            else
+            {
+                $products = DB::table('products as p')
+                    ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                    ->join('categories as c','p.category_id','=','c.category_id')
+                    ->join('types as t','p.type_id','=','t.type_id')
+                    ->where('c.name','=',$category)
+                    ->where('t.name','=',$type)
+                    ->get();
+            }
+
+        }
         
         if($order == 'baix-alt')
         {
-            $products = DB::table('products as p')
-                ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
-                ->join('categories as c','p.category_id','=','c.category_id')
-                ->where('p.name','LIKE','%'.$search.'%')
-                ->orWhere('c.name','LIKE','%'.$search.'%')
-                ->orWhere('p.brand','LIKE','%'.$search.'%')
-                ->orderBy('p.price', 'asc')
-                ->paginate(10);
+            if($category == null && $type == null)
+            {
+                if($sizes!==null && $categories!==null && $brands!==null )
+                {
+                    
+                    if($request->get('preu') !== "+200" && $request->get('preu') !== "tots")
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->whereBetween('p.price',[$minPrice, $maxPrice])
+                            ->orderBy('p.price', 'asc')
+                            ->distinct()
+                            ->get();
+                    }
+                    else if($request->get('preu') == "tots")
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->where('p.price','>',0)
+                            ->orderBy('p.price', 'asc')
+                            ->distinct()
+                            ->get();
+                    }
+                    else
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->where('p.price','>',200)
+                            ->orderBy('p.price', 'asc')
+                            ->distinct()
+                            ->get();
+                    }
+    
+                }
+                else
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->where('p.name','LIKE','%'.$search.'%')
+                        ->orWhere('c.name','LIKE','%'.$search.'%')
+                        ->orWhere('p.brand','LIKE','%'.$search.'%')
+                        ->orderBy('p.price', 'asc')
+                        ->get();
+                }
+
+            }
+            else
+            {
+                if($sizes!==null && $categories!==null && $brands!==null )
+                {
+                
+                if($request->get('preu') !== "+200" && $request->get('preu') !== "tots")
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->whereBetween('p.price',[$minPrice, $maxPrice])
+                        ->orderBy('p.price', 'asc')
+                        ->distinct()
+                        ->get();
+                }
+                else if($request->get('preu') == "tots")
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->where('p.price','>',0)
+                        ->orderBy('p.price', 'asc')
+                        ->distinct()
+                        ->get();
+                }
+                else
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('products_size as ps','p.product_id','=','ps.product_id')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->whereIn('ps.size',$sizes)
+                        ->whereIn('c.name',$categories)
+                        ->whereIn('p.brand',$brands)
+                        ->where('p.price','>',200)
+                        ->orderBy('p.price', 'asc')
+                        ->distinct()
+                        ->get();
+                }
+
+                }
+                else
+                {
+                    $products = DB::table('products as p')
+                        ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                        ->join('categories as c','p.category_id','=','c.category_id')
+                        ->join('types as t','p.type_id','=','t.type_id')
+                        ->where('c.name','=',$category)
+                        ->where('t.name','=',$type)
+                        ->orderBy('p.price', 'asc')
+                        ->get();
+                }
+            }
         }
 
         else if($order == 'alt-baix')
         {
-            $products = DB::table('products as p')
-                ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
-                ->join('categories as c','p.category_id','=','c.category_id')
-                ->where('p.name','LIKE','%'.$search.'%')
-                ->orWhere('c.name','LIKE','%'.$search.'%')
-                ->orWhere('p.brand','LIKE','%'.$search.'%')
-                ->orderBy('p.price', 'desc')
-                ->paginate(10);
+            if($category == null && $type == null)
+            {
+                if($sizes!==null && $categories!==null && $brands!==null )
+                {
+                    
+                    if($request->get('preu') !== "+200" && $request->get('preu') !== "tots")
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->whereBetween('p.price',[$minPrice, $maxPrice])
+                            ->orderBy('p.price', 'desc')
+                            ->distinct()
+                            ->get();
+                    }
+                    else if($request->get('preu') == "tots")
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->where('p.price','>',0)
+                            ->orderBy('p.price', 'desc')
+                            ->distinct()
+                            ->get();
+                    }
+                    else
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->where('p.price','>',200)
+                            ->orderBy('p.price', 'desc')
+                            ->distinct()
+                            ->get();
+                    }
+    
+                }
+                else
+                {
+                    $products = DB::table('products as p')
+                    ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                    ->join('categories as c','p.category_id','=','c.category_id')
+                    ->where('p.name','LIKE','%'.$search.'%')
+                    ->orWhere('c.name','LIKE','%'.$search.'%')
+                    ->orWhere('p.brand','LIKE','%'.$search.'%')
+                    ->orderBy('p.price', 'desc')
+                    ->get();
+                }
+                
+            }
+            else
+            {
+                if($sizes!==null && $categories!==null && $brands!==null )
+                {
+                    
+                    if($request->get('preu') !== "+200" && $request->get('preu') !== "tots")
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->whereBetween('p.price',[$minPrice, $maxPrice])
+                            ->orderBy('p.price', 'desc')
+                            ->distinct()
+                            ->get();
+                    }
+                    else if($request->get('preu') == "tots")
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->where('p.price','>',0)
+                            ->orderBy('p.price', 'desc')
+                            ->distinct()
+                            ->get();
+                    }
+                    else
+                    {
+                        $products = DB::table('products as p')
+                            ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                            ->join('products_size as ps','p.product_id','=','ps.product_id')
+                            ->join('categories as c','p.category_id','=','c.category_id')
+                            ->whereIn('ps.size',$sizes)
+                            ->whereIn('c.name',$categories)
+                            ->whereIn('p.brand',$brands)
+                            ->where('p.price','>',200)
+                            ->orderBy('p.price', 'desc')
+                            ->distinct()
+                            ->get();
+                    }
+    
+                }
+                else
+                {
+                    $products = DB::table('products as p')
+                    ->select('p.product_id', 'p.name as name', 'p.description', 'p.price as price', 'p.brand', 'c.name as categoryName')
+                    ->join('categories as c','p.category_id','=','c.category_id')
+                    ->join('types as t','p.type_id','=','t.type_id')
+                    ->where('c.name','=',$category)
+                    ->where('t.name','=',$type)
+                    ->orderBy('p.price', 'desc')
+                    ->get();
+                }
+            }
         }
 
         $imageProducts = DB::table('images_products')
@@ -69,8 +512,7 @@ class shopController extends Controller
             ->get()
             ->toarray();
 
-
-        return view('shop', compact('products','imageProducts','search','order'));
+        return view('shop', compact('products','imageProducts','search','order', 'category', 'type','sizes','categories','brands','price'));
 
     }
 

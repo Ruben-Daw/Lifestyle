@@ -15,7 +15,9 @@
                         <div class="card mb-3">
                             <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{asset('imgs/'.$p->url)}}" class="img-fluid rounded-start" alt="...">
+                                <a href="{{ route('shop.show', $p->product_id) }}" style="text-decoration: none;" >
+                                    <img src="{{asset('imgs/'.$p->url)}}" class="img-fluid rounded-start" alt="...">
+                                </a>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
