@@ -138,7 +138,17 @@
                 <div class="card mb-3 mt-4">
                     <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="{{ asset('imgs/'.$image->url)}}" class="img-fluid rounded-start" alt="...">
+                        @forelse ($imagesProduct as $image)
+                            
+                            @if($image->primary == "True")
+
+                                <img src="{{ asset('imgs/'.$image->url)}}" class="img-fluid rounded-start" alt="...">
+                                
+                            @endif
+
+                        @empty
+                            
+                        @endforelse
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
