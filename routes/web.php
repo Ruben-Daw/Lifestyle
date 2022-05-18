@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\adminController;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\contactController;
+use App\Http\Controllers\productsController;
 use App\Http\Controllers\favoritesController;
 use App\Http\Controllers\userAccountController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -31,8 +32,17 @@ Route::view('/', 'home')->middleware('auth.user')->name('home');
 Route::view('/contact', 'contact')->middleware('auth.user')->name('contact');
 // Route::view('/shop', 'shop')->middleware('auth.user')->name('shop');
 
+Route::get('/admin', [adminController::class, 'index'])
+    ->middleware('auth.admin')
+    ->name('admin.index');
 Route::get('/admin/users', [userController::class,'index'])->middleware('auth.admin')->name('users.index');
 Route::get('/admin/users/{userId}', [userController::class,'destroy'])->middleware('auth.admin')->name('users.destroy');
+Route::get('/admin/products', [productsController::class,'index'])->middleware('auth.admin')->name('products.index');
+Route::get('/admin/products/{productId}', [productsController::class,'destroy'])->middleware('auth.admin')->name('products.destroy');
+Route::get('/admin/products/edit/{productId}', [productsController::class,'edit'])->middleware('auth.admin')->name('products.edit');
+Route::patch('/admin/products/edit/{productId}', [productsController::class,'update'])->middleware('auth.admin')->name('products.update');
+Route::get('/admin/addProduct', [productsController::class,'create'])->middleware('auth.admin')->name('products.create');
+Route::post('/admin/addProduct', [productsController::class,'store'])->middleware('auth.admin')->name('products.store');
 
 Route::get('/shop/{category?}/{type?}',[shopController::class,'index'])->middleware('auth.user')->name('shop.index');
 Route::get('/ofertes',[shopController::class,'index'])->middleware('auth.user');
@@ -69,10 +79,6 @@ Route::get('/forgot-password', function () {
 Route::get('/reset-password/{token}', function ($token) {
     return view('auth.passwords.reset', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
-
-Route::get('/admin', [adminController::class, 'index'])
-    ->middleware('auth.admin')
-    ->name('admin.index');
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
