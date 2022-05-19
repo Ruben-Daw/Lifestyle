@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\DB;
     function getProductsCartNum()
     {
         return DB::table('products_cart')
-            ->where('user_id','=',auth()->id())
-            ->count();
+        ->where('user_id','=',auth()->id())
+        ->sum('quantity');
+
     }
 
     function getProductsCartTotalPrice()

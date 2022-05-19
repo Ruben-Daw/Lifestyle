@@ -213,8 +213,8 @@ class productsController extends Controller
                 'description' => $request->get('description'),
                 'price' => $request->get('price'),
                 'brand' => $request->get('brand'),
-                'category_id' => $category_id,
-                'type_id' => $type_id,
+                'category_id' => $category_id->category_id,
+                'type_id' => $type_id->type_id,
             ]);
 
             return redirect()->route('products.index')->withSuccess('Producte modificat amb èxit');
