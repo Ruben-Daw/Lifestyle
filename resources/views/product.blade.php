@@ -93,9 +93,9 @@
                 </div>
                 
                 @auth()
-                    <a href="/cart/{{auth()->id()}}/{{$product->product_id}}/{{$size}}/1" class="btn btn-dark w-75 mt-4">Afegir al carrito</a>
+                    <a href="{{route('cart.store',[auth()->id(),$product->product_id,$size,1])}}" class="btn btn-dark w-75 mt-4">Afegir al carrito</a>
                 @else
-                    <a href="/cart/null/{{$product->product_id}}/{{$size}}/1" class="btn btn-dark w-75 mt-4">Afegir al carrito</a>
+                    <a href="{{route('cart.store',['null',$product->product_id,$size,1])}}" class="btn btn-dark w-75 mt-4">Afegir al carrito</a>
                 @endauth
 
 

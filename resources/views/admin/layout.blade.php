@@ -88,7 +88,7 @@
     <!-- COMPONENT NAVBAR i tambe aplico la propietat rounded -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mt-2 rounded" >
         <div class="container-fluid">
-            <a href="/"><img src="{{ asset('imgs/logo.png') }}" height="150px" style="position: relative;"></a>
+            <a href="{{route('home')}}"><img src="{{ asset('imgs/logo.png') }}" height="150px" style="position: relative;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -96,20 +96,20 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 offset-lg-1">
                     <!-- COMPONENT COLLAPSE -->
                     <li class="nav-item">
-                        <a href="/admin/users" class="link {{ request()->is('/admin/users') ? 'active' : '' }}" style="color:black; text-decoration: none;">Tractament d'usuaris</a>
+                        <a href="{{route('users.index')}}" class="link {{ request()->is('/admin/users') ? 'active' : '' }}" style="color:black; text-decoration: none;">Tractament d'usuaris</a>
                     </li>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <li class="nav-item">
-                        <a href="/admin/products" class="link {{ request()->is('/admin/products') ? 'active' : '' }}" style="color:black; text-decoration: none;">Tractament de productes</a>
+                        <a href="{{route('products.index')}}" class="link {{ request()->is('/admin/products') ? 'active' : '' }}" style="color:black; text-decoration: none;">Tractament de productes</a>
                     </li>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <li class="nav-item">
-                        <a href="/admin/addProduct" class="link {{ request()->is('/admin/addProduct') ? 'active' : '' }}" style="color:black; text-decoration: none;">Afegir producte</a>
+                        <a href="{{route('products.create')}}" class="link {{ request()->is('/admin/addProduct') ? 'active' : '' }}" style="color:black; text-decoration: none;">Afegir producte</a>
                     </li>
                 </ul>
                 
                 @auth
-                <a href="/login" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" ><i class="bi bi-box-arrow-left" style="text-decoration: none; margin-right:10px;"></i></a>&nbsp&nbsp
+                <a href="{{route('login')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" ><i class="bi bi-box-arrow-left" style="text-decoration: none; margin-right:10px;"></i></a>&nbsp&nbsp
                 @endauth
 
                 <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">

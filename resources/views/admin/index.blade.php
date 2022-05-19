@@ -11,8 +11,8 @@
 <body>
 
     <ul>
-        <li><a href="/admin/users">Veure usuaris</a></li>
-        <li><a href="/login" onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i class="bi bi-box-arrow-in-left"></i></a></li>
+        <li><a href="{{route('users.index')}}">Veure usuaris</a></li>
+        <li><a href="{{route('login')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()"><i class="bi bi-box-arrow-in-left"></i></a></li>
     </ul>
     
     <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">

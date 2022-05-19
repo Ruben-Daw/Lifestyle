@@ -913,7 +913,7 @@
         <div class="row mt-3" style="margin-top:60px;">
             @forelse ($products as $product)
                 
-                <div class="col-6 col-lg-3 mb-4"> 
+                <div class="col-12 col-lg-3 mb-4"> 
 
                     
                         <div class="card card2">

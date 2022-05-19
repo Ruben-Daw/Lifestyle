@@ -33,7 +33,7 @@
 
             <h2 style="color:white; margin-top:30px;">La teva llista de favorits aquesta buida</h2>
             <p style="color:white; margin-top:30px;">Quan hagis afegit alguna cosa a la teva llista, apareixerà aquí. Vols començar?</p>
-            <a class="btn btn-dark" href="/shop" role="button" style="text-align:center; line-height:20px;">Comença <i class="bi bi-arrow-right" style="font-size: 20px;"></i></a>
+            <a class="btn btn-dark" href="{{route('shop.index')}}" role="button" style="text-align:center; line-height:20px;">Comença <i class="bi bi-arrow-right" style="font-size: 20px;"></i></a>
     
         @endif
     </div>
