@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cartController;
+use App\Http\Controllers\homeController;
 use App\Http\Controllers\shopController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Password;
@@ -28,7 +29,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::view('/', 'home')->middleware('auth.user')->name('home');
+Route::get('/',[homeController::class, 'index'])->middleware('auth.user')->name('home');
 Route::view('/contact', 'contact')->middleware('auth.user')->name('contact');
 // Route::view('/shop', 'shop')->middleware('auth.user')->name('shop');
 
