@@ -45,7 +45,6 @@ Route::get('/admin/addProduct', [productsController::class,'create'])->middlewar
 Route::post('/admin/addProduct', [productsController::class,'store'])->middleware('auth.admin')->name('products.store');
 
 Route::get('/shop/{category?}/{type?}',[shopController::class,'index'])->middleware('auth.user')->name('shop.index');
-Route::get('/ofertes',[shopController::class,'index'])->middleware('auth.user');
 Route::get('/product/{id}',[shopController::class,'show'])->middleware('auth.user')->name('shop.show');
 Route::get('/cart',[cartController::class,'index'])->middleware(['auth.user','verified'])->name('cart.index');
 Route::get('/cart/{user_id}/{product_id}/{size}/{quantity}',[cartController::class,'store'])->middleware(['auth.user', 'verified'])->name('cart.store');
@@ -124,6 +123,35 @@ Route::post('/reset-password', function (Request $request) {
                 ? redirect()->route('login')->with('status', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
+
+Route::get('/404', function () {
+    return abort(404);
+});
+
+Route::get('/401', function () {
+    return abort(401);
+});
+
+Route::get('/403', function () {
+    return abort(403);
+});
+
+Route::get('/419', function () {
+    return abort(419);
+});
+
+Route::get('/429', function () {
+    return abort(429);
+});
+
+Route::get('/500', function () {
+    return abort(500);
+});
+
+Route::get('/503', function () {
+    return abort(503);
+});
+
 
 
 Auth::routes(['verify' => true]);
