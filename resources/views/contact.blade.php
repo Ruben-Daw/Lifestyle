@@ -165,22 +165,11 @@
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['padel', 'home'])}}" style="color:black; text-decoration: none;">Padel</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['tenis', 'home'])}}" style="color:black; text-decoration: none;">Tenis</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
                         <b><a href="{{route('shop.index',['atletisme', 'home'])}}" style="color:black; text-decoration: none;">Atletisme</a></b>    
                     </div>
 
-                </div>
-
-                <div class="row justify-content-start mt-lg-2">
                     <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['skate', 'home'])}}" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                        <b><a href="{{route('shop.index',['Skateboard', 'home'])}}" style="color:black; text-decoration: none;">Skateboard</a></b>    
                     </div>
                 </div>
             </div>
@@ -204,22 +193,11 @@
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['padel', 'dona'])}}" style="color:black; text-decoration: none;">Padel</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['tenis', 'dona'])}}" style="color:black; text-decoration: none;">Tenis</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
                         <b><a href="{{route('shop.index',['atletisme', 'dona'])}}" style="color:black; text-decoration: none;">Atletisme</a></b>    
                     </div>
 
-                </div>
-
-                <div class="row justify-content-start mt-lg-2">
                     <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['skate', 'dona'])}}" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                        <b><a href="{{route('shop.index',['Skateboard', 'dona'])}}" style="color:black; text-decoration: none;">Skateboard</a></b>    
                     </div>
                 </div>
             </div>
@@ -243,25 +221,13 @@
                     </div>
 
                     <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['padel', 'nen'])}}" style="color:black; text-decoration: none;">Padel</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['tenis', 'nen'])}}" style="color:black; text-decoration: none;">Tenis</a></b>    
-                    </div>
-
-                    <div class="col-12 col-lg-2">
                         <b><a href="{{route('shop.index',['atletisme', 'nen'])}}" style="color:black; text-decoration: none;">Atletisme</a></b>    
                     </div>
 
-                </div>
-
-                <div class="row justify-content-start mt-lg-2">
                     <div class="col-12 col-lg-2">
-                        <b><a href="{{route('shop.index',['skate', 'nen'])}}" style="color:black; text-decoration: none;">Skateboard</a></b>    
+                        <b><a href="{{route('shop.index',['Skateboard', 'nen'])}}" style="color:black; text-decoration: none;">Skateboard</a></b>    
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -363,10 +329,8 @@
                                                     <li><b><a href="{{route('shop.index',['lifestyle', 'home'])}}" class="py-1 d-block">Lifestyle</a></b></li>
                                                     <li><b><a href="{{route('shop.index',['futbol', 'home'])}}" class="py-1 d-block">Fútbol</a></b></li>
                                                     <li><b><a href="{{route('shop.index',['basquet', 'home'])}}" class="py-1 d-block">Basquet</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['padel', 'home'])}}" class="py-1 d-block">Padel</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['tenis', 'home'])}}" class="py-1 d-block">Tenis</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['atletisme', 'home'])}}" class="py-1 d-block">Atletisme</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['skate', 'home'])}}" class="py-1 d-block">Skateboard</a></b></li>
+                                                   <li><b><a href="{{route('shop.index',['atletisme', 'home'])}}" class="py-1 d-block">Atletisme</a></b></li>
+                                                    <li><b><a href="{{route('shop.index',['Skateboard', 'home'])}}" class="py-1 d-block">Skateboard</a></b></li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-4 mb-md-0 mb-4">
@@ -375,10 +339,8 @@
                                                     <li><b><a href="{{route('shop.index',['lifestyle', 'dona'])}}" class="py-1 d-block">Lifestyle</a></b></li>
                                                     <li><b><a href="{{route('shop.index',['futbol', 'dona'])}}" class="py-1 d-block">Fútbol</a></b></li>
                                                     <li><b><a href="{{route('shop.index',['basquet', 'dona'])}}" class="py-1 d-block">Basquet</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['padel', 'dona'])}}" class="py-1 d-block">Padel</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['tenis', 'dona'])}}" class="py-1 d-block">Tenis</a></b></li>
                                                     <li><b><a href="{{route('shop.index',['atletisme', 'dona'])}}" class="py-1 d-block">Atletisme</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['skate', 'dona'])}}" class="py-1 d-block">Skateboard</a></b></li>
+                                                    <li><b><a href="{{route('shop.index',['Skateboard', 'dona'])}}" class="py-1 d-block">Skateboard</a></b></li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-4 mb-md-0 mb-4">
@@ -387,10 +349,8 @@
                                                     <li><b><a href="{{route('shop.index',['lifestyle', 'nen'])}}" class="py-1 d-block">Lifestyle</a></b></li>
                                                     <li><b><a href="{{route('shop.index',['futbol', 'nen'])}}" class="py-1 d-block">Fútbol</a></b></li>
                                                     <li><b><a href="{{route('shop.index',['basquet', 'nen'])}}" class="py-1 d-block">Basquet</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['padel', 'nen'])}}" class="py-1 d-block">Padel</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['tenis', 'nen'])}}" class="py-1 d-block">Tenis</a></b></li>
                                                     <li><b><a href="{{route('shop.index',['atletisme', 'nen'])}}" class="py-1 d-block">Atletisme</a></b></li>
-                                                    <li><b><a href="{{route('shop.index',['skate', 'nen'])}}" class="py-1 d-block">Skateboard</a></b></li>
+                                                    <li><b><a href="{{route('shop.index',['Skateboard', 'nen'])}}" class="py-1 d-block">Skateboard</a></b></li>
                                                 </ul>
                                             </div>
                                         </div>

@@ -49,7 +49,7 @@
                             
                             <div class="card-body">
                             <h5 class="card-title">{{$a->name}} <span style="color:red; float:right;">€{{$a->price}}</span></h5>
-                            <p class="card-text" style="-webkit-line-clamp:4;">{{$a->description}}</p>
+                            <p class="card-text" style="overflow:hidden; text-overflow:ellipsis; display: -webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical;">{{$a->description}}</p>
                             </div>
                         </div>
                     </div> 
@@ -73,7 +73,7 @@
                             
                             <div class="card-body">
                             <h5 class="card-title">{{$p->name}} <span style="color:red; float:right;">€{{$p->price}}</span></h5>
-                            <p class="card-text" style="-webkit-line-clamp:4;">{{$p->description}}</p>
+                            <p class="card-text" style="overflow:hidden; text-overflow:ellipsis; display: -webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical;">{{$p->description}}</p>
                             </div>
                         </div>
                     </div> 
