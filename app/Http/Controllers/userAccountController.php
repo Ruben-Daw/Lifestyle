@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class userAccountController extends Controller
 {
+    
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * It gets the user data from the database and returns it to the view.
+     * 
+     * @return An array of objects.
      */
     public function index()
     {
@@ -57,10 +58,13 @@ class userAccountController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * If the email is valid, then update the email in the database and redirect to the home page with
+     * a success message.
+     * If the email is not valid, then redirect to the userAccount page with an error message.
+     * 
+     * @param Request request The request object.
+     * 
+     * @return The user is being returned.
      */
     public function editEmail(Request $request)
     {
@@ -76,11 +80,14 @@ class userAccountController extends Controller
         
     }
 
-        /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+    /**
+     * If the user has filled in the form correctly, the data is updated in the database and the user
+     * is redirected to the home page with a message. If the user has not filled in the form correctly,
+     * the user is redirected to the userAccount page with a message
+     * 
+     * @param Request request The request object.
+     * 
+     * @return The user is being returned.
      */
     public function editUserPersonalData(Request $request)
     {

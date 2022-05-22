@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class favoritesController extends Controller
 {
+   
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * I'm trying to get the sizes of the products that are in the favorites table.
+     * </code>
      */
     public function index()
     {
@@ -46,11 +46,15 @@ class favoritesController extends Controller
         //
     }
 
+    
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * If the product is not in the user's favorites, add it. If it is, return a message saying it's
+     * already there
+     * 
+     * @param user_id The id of the user who is adding the product to their favorites.
+     * @param product_id The id of the product that the user wants to add to their favorites.
+     * 
+     * @return The user_id and product_id
      */
     public function store($user_id, $product_id)
     {
@@ -110,11 +114,14 @@ class favoritesController extends Controller
         //
     }
 
+    
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * It deletes a row from the favorite_products table where the product_id and user_id match the
+     * product_id and user_id of the product that was clicked on
+     * 
+     * @param product_id The id of the product that the user wants to add to their favorites.
+     * 
+     * @return The id of the favorite product.
      */
     public function destroy($product_id)
     {

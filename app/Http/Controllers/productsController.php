@@ -10,10 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class productsController extends Controller
 {
+    
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * It searches the database for the search term and returns the results in a paginated list.
+     * 
+     * @param Request request The request object.
+     * 
+     * @return The search results are being returned.
      */
     public function index(Request $request)
     {
@@ -33,11 +36,9 @@ class productsController extends Controller
 
         return view('admin.products', compact('products','search'));
     }
-
+    
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * It gets all the categories and types from the database and passes them to the view.
      */
     public function create()
     {
@@ -53,10 +54,12 @@ class productsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * It creates a new product in the database, and then it creates a new image for that product in
+     * the database.
+     * 
+     * @param Request request The request object.
+     * 
+     * @return the view of the form to create a new product.
      */
     public function store(Request $request)
     {
@@ -159,10 +162,12 @@ class productsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * It gets the product with the id of , gets all the categories and types, and then returns the
+     * view with the product, categories, and types
+     * 
+     * @param id the id of the product to be edited
+     * 
+     * @return The view is being returned.
      */
     public function edit($id)
     {
@@ -183,11 +188,13 @@ class productsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * If the request has a name, description, price, brand, category and type, then it will update the
+     * product with the given id
+     * 
+     * @param Request request The request object.
+     * @param id The id of the product to be updated
+     * 
+     * @return The product is being updated with the new values.
      */
     public function update(Request $request, $id)
     {
@@ -226,10 +233,12 @@ class productsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * It deletes the product with the given id
+     * 
+     * @param id The id of the product to be deleted.
+     * 
+     * @return The product is being deleted from the database and the user is being redirected to the
+     * products index page.
      */
     public function destroy($id)
     {

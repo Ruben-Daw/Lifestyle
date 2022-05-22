@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class userController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * It searches the database for the user's last name, first name, or email, and returns the results
+     * in a paginated list.
+     * 
+     * @param Request request The request object.
+     * 
+     * @return The view is being returned.
      */
     public function index(Request $request)
     {
@@ -84,12 +88,13 @@ class userController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   /**
+    * It deletes the user with the given id
+    * 
+    * @param id The id of the user to be deleted.
+    * 
+    * @return The user is being returned.
+    */
     public function destroy($id)
     {
         User::destroy($id);

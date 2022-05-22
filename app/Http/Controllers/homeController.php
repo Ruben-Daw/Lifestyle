@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class homeController extends Controller
 {
+    
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * It gets the primary image of each product and the products of each brand and passes them to the
+     * view.
+     * 
+     * @return The view home.blade.php
      */
     public function index()
     {

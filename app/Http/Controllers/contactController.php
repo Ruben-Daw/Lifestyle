@@ -30,10 +30,11 @@ class contactController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * The function validates the data sent by the user, then sends an email to the address specified
+     * in the Mail::to() function, and finally redirects the user to the previous page with a success
+     * message
+     * 
+     * @return The message is being returned.
      */
     public function store()
     {

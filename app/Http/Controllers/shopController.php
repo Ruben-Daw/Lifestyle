@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\DB;
 class shopController extends Controller
 {
 
-    //protected $search = "ocho";
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+/**
+ * It gets the products from the database and returns them to the view.
+ * 
+ * @param Request request The request object.
+ * @param category the category of the product
+ * @param type null
+ */
     public function index(Request $request, $category = null, $type = null)
     {
 
@@ -538,10 +538,13 @@ class shopController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * It gets the product information, the images of the product, the sizes of the product and the
+     * stock of the product
+     * 
+     * @param id the id of the product
+     * @param Request request The request object.
+     * 
+     * @return The product, images, sizes and stock of the product.
      */
     public function show($id, Request $request)
     {

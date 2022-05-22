@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class cartController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * I'm trying to get the sizes of the products and the products in the cart.
      */
     public function index()
     {
@@ -46,12 +45,18 @@ class cartController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
+/**
+ * If the product doesn't exist in the cart, add it. If it does, redirect back to the shop with a
+ * message
+ * 
+ * @param user_id 1
+ * @param product_id The id of the product
+ * @param size is the size of the product
+ * @param quantity 1
+ * 
+ * @return The productCartExists variable is being returned.
+ */
     public function store($user_id, $product_id, $size, $quantity)
     {
 
@@ -100,12 +105,15 @@ class cartController extends Controller
         //
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * I get the product_id from the product_cart table, then I get the stock from the products_size
+     * table, then I check if the stock is greater than the quantity, if it is, I update the cart, if
+     * not, I redirect back with a message.
+     * </code>
+     * 
+     * @param Request request The request object.
+     * @param id The id of the cart item
      */
     public function update(Request $request, $id)
     {
@@ -137,11 +145,13 @@ class cartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * It destroys the cart.
+     * 
+     * @param id The ID of the item in the cart.
+     * 
+     * @return The cart is being destroyed.
      */
     public function destroy($id)
     {
